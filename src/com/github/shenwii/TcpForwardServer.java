@@ -152,6 +152,8 @@ public class TcpForwardServer {
             return;
         SocketChannel client2 = map.get(client1);
         SelectionKey key2 = client2.keyFor(selector);
+        if(key2 == null)
+            return;
         ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
         buffer.clear();
         int read = client1.read(buffer);
@@ -188,6 +190,8 @@ public class TcpForwardServer {
             return;
         SocketChannel client2 = map.get(client1);
         SelectionKey key2 = client2.keyFor(selector);
+        if(key2 == null)
+            return;
         ByteBuffer buffer = (ByteBuffer) key.attachment();
         if(buffer.hasRemaining()) {
             //写入数据
